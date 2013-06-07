@@ -1,8 +1,10 @@
+/* jshint undef: true, unused: true */
+/* global define */
 /**
  * A simple jQuery Plugin that implements the yellow fade pattern
  * 
  * @author  Tom Davies - Erskine Design
- * @version  1.0
+ * @version  1.0.1
  */
 define(["jQuery"], function() {
     (function(window, $) {
@@ -17,17 +19,19 @@ define(["jQuery"], function() {
             init: function() {
                 this.show();
             },
-            show: function(e) {
+            show: function() {
                 $("<div/>").width(this.$el.outerWidth() + this.opts.padding.h*2)
                         .height(this.$el.outerHeight() + this.opts.padding.v*2)
-                        .css({
+                        .css(
+                            {
                                 "position": "absolute",
                                 "left": this.$el.offset().left - this.opts.padding.h,
                                 "top": this.$el.offset().top - this.opts.padding.v,
                                 "background-color": this.opts.backgroundColor,
                                 "opacity": this.opts.opacity,
                                 "z-index": "9999999"
-                            })
+                            }
+                        )
                         .appendTo('body')
                         .fadeOut(this.opts.duration)
                         .queue(function (){
@@ -36,10 +40,10 @@ define(["jQuery"], function() {
             }
         };
 
-        $.fn.highlight = function(options) {
+        $.fn.highlight = function(option) {
             var opts = $.fn.highlight.defaults;
-            if (typeof options === 'object') {
-                opts = $.extend( {}, opts, options );
+            if (typeof option === 'object') {
+                opts = $.extend( {}, opts, option );
             }
             return this.each(function() {
                 var $this = $(this),
