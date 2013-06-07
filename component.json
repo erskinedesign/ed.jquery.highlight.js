@@ -2,7 +2,7 @@
   "name": "ed.jquery.highlight.js",
   "repo": "erskinedesign/ed.jquery.highlight.js",
   "description": "A simple jQuery Plugin that implements the yellow fade pattern, wrapped as a AMD module for use with Require.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "keywords": ["highlight", "jquery"],
   "dependencies": {},
   "development": {},

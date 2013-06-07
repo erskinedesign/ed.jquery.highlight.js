@@ -1,6 +1,6 @@
 {
   "name": "ed.jquery.highlight",
-  "version": "1.0.0",
+  "version": "1.0.1,
   "main": "jquery.highlight.js",
   "ignore": [
     "**/.*",
