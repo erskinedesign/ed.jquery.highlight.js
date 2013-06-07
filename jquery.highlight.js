@@ -9,6 +9,7 @@
 define(["jQuery"], function() {
     (function(window, $) {
         var Highlight = function(el, opts) {
+            this.el = el;
             this.$el = $(el);
             this.opts = opts;
             this.init();
@@ -20,21 +21,25 @@ define(["jQuery"], function() {
                 this.show();
             },
             show: function() {
-                $("<div/>").width(this.$el.outerWidth() + this.opts.padding.h*2)
-                        .height(this.$el.outerHeight() + this.opts.padding.v*2)
-                        .css({
-                            "position": "absolute",
-                            "left": this.$el.offset().left - this.opts.padding.h,
-                            "top": this.$el.offset().top - this.opts.padding.v,
-                            "background-color": this.opts.backgroundColor,
-                            "opacity": this.opts.opacity,
-                            "z-index": "9999999"
-                        })
-                        .appendTo('body')
-                        .fadeOut(this.opts.duration)
-                        .queue(function (){
-                            $(this).remove();
-                        });
+                var $highlight = $("<div/>");
+
+                $highlight.data('originalElement', this.el);
+
+                if ($.isFunction(this.opts.clickCallback)){
+                    $highlight.on('click', this.opts.clickCallback);
+                }
+                $highlight.width(this.$el.outerWidth() + this.opts.padding.h*2);
+                $highlight.height(this.$el.outerHeight() + this.opts.padding.v*2);
+                $highlight.css({
+                    "left": this.$el.offset().left - this.opts.padding.h,
+                    "top": this.$el.offset().top - this.opts.padding.v
+                });
+                $highlight.css(this.opts.css);
+                $highlight.appendTo('body');
+                $highlight.fadeOut(this.opts.duration);
+                $highlight.queue(function (){
+                    $(this).unbind().remove();
+                });
             }
         };
 
@@ -59,13 +64,18 @@ define(["jQuery"], function() {
         };
 
         $.fn.highlight.defaults = {
-            backgroundColor: "#ffff99",
-            opacity: "0.9",
+            css: {
+                "position": "absolute",
+                "background-color": "#ffff99",
+                "opacity": "0.9",
+                "z-index": "9999999"
+            },
             duration: 1800,
             padding: {
                 v: 5,
                 h: 2
-            }
+            },
+            clickCallback: false
         };
 
     })(window, jQuery);
