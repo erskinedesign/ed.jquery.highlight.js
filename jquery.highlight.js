@@ -22,16 +22,14 @@ define(["jQuery"], function() {
             show: function() {
                 $("<div/>").width(this.$el.outerWidth() + this.opts.padding.h*2)
                         .height(this.$el.outerHeight() + this.opts.padding.v*2)
-                        .css(
-                            {
-                                "position": "absolute",
-                                "left": this.$el.offset().left - this.opts.padding.h,
-                                "top": this.$el.offset().top - this.opts.padding.v,
-                                "background-color": this.opts.backgroundColor,
-                                "opacity": this.opts.opacity,
-                                "z-index": "9999999"
-                            }
-                        )
+                        .css({
+                            "position": "absolute",
+                            "left": this.$el.offset().left - this.opts.padding.h,
+                            "top": this.$el.offset().top - this.opts.padding.v,
+                            "background-color": this.opts.backgroundColor,
+                            "opacity": this.opts.opacity,
+                            "z-index": "9999999"
+                        })
                         .appendTo('body')
                         .fadeOut(this.opts.duration)
                         .queue(function (){
@@ -48,12 +46,14 @@ define(["jQuery"], function() {
             return this.each(function() {
                 var $this = $(this),
                 data = $this.data('highlight');
-
                 if(!data){
                     $this.data('highlight', data = new Highlight(this, opts));
                 }
-                if (typeof option === 'string') {
+                else if (typeof option === 'string') {
                     data[option]();
+                }
+                else {
+                    data.show(); //if called again
                 }
             });
         };
