@@ -1,0 +1,10 @@
+{
+  "name": "ed.jquery.highlight",
+  "version": "1.0.0",
+  "main": "jquery.highlight.js",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "components"
+  ]
+}
